@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="parcelles-panel">
+    <h2>Parcelles</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Nombre de bandes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let parcelle of parcelles()"
+          (click)="selectParcelle(parcelle)"
+          [class.selected]="isSelected(parcelle)()"
+        >
+          <td>{{ parcelle.id }}</td>
+          <td>{{ parcelle.nom || "-" }}</td>
+          <td>{{ parcelle.nombreBande || "-" }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="container">
+      <form (ngSubmit)="createParcelle()" class="parcelle-form">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          placeholder="Nom"
+          [value]="newParcelleForm().nom"
+          (input)="handleInput($event, 'nom')"
+        />
+        <label for="longueur">Longueur</label>
+        <input
+          type="number"
+          placeholder="longueur"
+          [value]="newParcelleForm().longueur"
+          (input)="handleInput($event, 'longueur')"
+        />
+        <label for="largeur">Largeur</label>
+        <input
+          type="number"
+          placeholder="largeur"
+          [value]="newParcelleForm().largeur"
+          (input)="handleInput($event, 'largeur')"
+        />
+        <button type="submit">Add Parcelle</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>number</th>
+            <th>Longueur</th>
+            <th>Largeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bande of bandes()">
+            <td>{{ bande.number }}</td>
+            <td>{{ bande.longueur || "-" }}</td>
+            <td>{{ bande.largeur || "-" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
